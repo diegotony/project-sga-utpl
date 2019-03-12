@@ -1,14 +1,14 @@
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+let Schema = mongoose.Schema;
 
-var salaSchema = new Schema({
-    name = {
+let salaSchema = new Schema({
+    name: {
         type: String,
-        required: [true, 'El nombre de la sala es requerido']
+        required: [true, 'The name must be assigned']
     },
-    qr_code = {
+    qr_code: {
         type: String,
-        required: [true, 'El nombre de la sala es requerido']
+        required: [true, 'the qr_code must be assigned']
     }
 });
 

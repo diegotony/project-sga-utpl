@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
-var user = require('./usuario.js')
 
-app.use(user);
+// Collections of routes
+
+app.use(require('./usuario'));
+app.use(require('./sala'));
 
 module.exports = app;

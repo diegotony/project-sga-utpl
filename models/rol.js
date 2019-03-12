@@ -1,10 +1,10 @@
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+let Schema = mongoose.Schema;
 
-var rolSchema = new Schema({
-    name = {
+let rolSchema = new Schema({
+    name: {
         type: String,
-        required: [true, 'El nombre de la sala es requerido']
+        required: [true, 'the name must be assigned']
     }
 });
 

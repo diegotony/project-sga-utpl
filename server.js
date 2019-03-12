@@ -13,17 +13,16 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 
-app.use(require('./routes/usuario'));
+app.use(require('./routes/index'));
 
 // DB config
 
 mongoose.connect(process.env.URLDB, (err, res) => {
     if (err) throw err;
-    console.log("MONGO  ");
-
+    console.log("MONGO  IS WORKING ");
 });
 
 app.listen(process.env.PORT, () => {
-    console.log("NODEJS", process.env.PORT);
+    console.log("NODEJS LISTENING", process.env.PORT);
 
 })
