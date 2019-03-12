@@ -7,14 +7,16 @@ const Rol = require('../models/rol');
 //  GET LIST
 
 app.get('/rol/', (req, res) => {
-    Rol.find({})
+    Rol.find({
+            state: true
+        })
         .exec((err, roles) => {
             if (err) {
                 return res.status(500).json({
                     ok: false,
                     err
                 });
-            };
+            }
             res.json({
                 ok: true,
                 roles
@@ -119,7 +121,14 @@ app.put('/rol/:id', (req, res) => {
 
 app.delete('/rol/:id', (req, res) => {
     let id = req.params.id;
-    Rol.findByIdAndRemove(id, (err, rolBorrada) => {
+
+    let cambiaState = {
+        state: false
+    }
+
+    Rol.findByIdAndUpdate(id, cambiaState, {
+        new: true,
+    }, (err, rolBorrada) => {
         if (err) {
             return res.status(400).json({
                 ok: false,

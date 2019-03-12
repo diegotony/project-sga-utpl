@@ -24,6 +24,14 @@ let usuarioSchema = new Schema({
         type: String,
         required: [true, 'the email must be assigned']
     },
+    username: {
+        type: String,
+        required: [true, 'the username must be assigned']
+    },
+    password: {
+        type: String,
+        required: [true, 'the password must be assigned']
+    },
     rol: {
         type: Schema.Types.ObjectId,
         ref: 'Rol',

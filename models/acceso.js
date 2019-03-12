@@ -9,7 +9,7 @@ let typeAccess = {
 let accesoSchema = new Schema({
     date: Date,
     hour: String,
-    user: {
+    usuario: {
         type: Schema.Types.ObjectId,
         ref: 'Usuario',
         required: [true, 'the rol must be assigned']
@@ -21,9 +21,11 @@ let accesoSchema = new Schema({
     },
     typeAccess: {
         type: String,
-        default: 'ENTRADA',
         enum: typeAccess
-
+    },
+    state: {
+        type: Boolean,
+        default: true
     }
 });
 

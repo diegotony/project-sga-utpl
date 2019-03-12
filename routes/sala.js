@@ -1,20 +1,22 @@
 const express = require('express')
-const app = express();
+const _ = require('underscore');
 const Sala = require('../models/sala');
+const app = express();
 
 
 
 //  GET LIST
-
 app.get('/sala/', (req, res) => {
-    Sala.find({})
+    Sala.find({
+            state: true
+        })
         .exec((err, salas) => {
             if (err) {
                 return res.status(500).json({
                     ok: false,
                     err
                 });
-            };
+            }
             res.json({
                 ok: true,
                 salas
@@ -123,7 +125,13 @@ app.put('/sala/:id', (req, res) => {
 
 app.delete('/sala/:id', (req, res) => {
     let id = req.params.id;
-    Sala.findByIdAndRemove(id, (err, salaBorrada) => {
+    let cambiaState = {
+        state: false
+    }
+
+    Sala.findByIdAndUpdate(id, cambiaState, {
+        new: true,
+    }, (err, salaBorrada) => {
         if (err) {
             return res.status(400).json({
                 ok: false,

@@ -13,6 +13,10 @@ let PermisoSchema = new Schema({
     allowedDays: {
         type: [String],
         required: [true, 'The days must be assigned ']
+    },
+    state: {
+        type: Boolean,
+        default: true
     }
 });
 
