@@ -86,7 +86,6 @@ app.post('/sala', (req, res) => {
 
 });
 
-
 app.put('/sala/:id', (req, res) => {
     let id = req.params.id;
 

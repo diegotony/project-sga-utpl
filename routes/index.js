@@ -5,5 +5,5 @@ const app = express();
 
 app.use(require('./usuario'));
 app.use(require('./sala'));
-
+app.use(require('./rol'));
 module.exports = app;
