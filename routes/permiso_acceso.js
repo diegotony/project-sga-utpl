@@ -1,14 +1,14 @@
 const express = require('express')
 const app = express();
-const Rol = require('../models/rol');
+const PermisonAcceso = require('../models/permiso_acceso');
 
 //  GET LIST
 
-app.get('/rol/', (req, res) => {
-    Rol.find({
+app.get('/permiso/', (req, res) => {
+    PermisonAcceso.find({
             state: true
         })
-        .exec((err, roles) => {
+        .exec((err, permisos) => {
             if (err) {
                 return res.status(500).json({
                     ok: false,
@@ -17,7 +17,7 @@ app.get('/rol/', (req, res) => {
             }
             res.json({
                 ok: true,
-                roles
+                permisos
             });
         });
 
@@ -27,24 +27,24 @@ app.get('/rol/', (req, res) => {
 // GET ID ROL
 
 
-app.get('/rol/:id', (req, res) => {
+app.get('/permiso/:id', (req, res) => {
     id = req.params.id;
-    Rol.findById(id, (err, rolDB) => {
+    PermisonAcceso.findById(id, (err, permisoDB) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
                 err
             });
         };
-        if (!rolDB) {
+        if (!permisoDB) {
             return res.status(500).json({
                 ok: false,
                 err: "El id no es correcto"
             });
-        };
+        }
         res.json({
             ok: true,
-            rolDB
+            permisoDB
         });
     });
 
@@ -53,25 +53,24 @@ app.get('/rol/:id', (req, res) => {
 
 // POST ROL
 
-app.post('/rol', (req, res) => {
+app.post('/permiso', (req, res) => {
     let body = req.body;
-    let rol = new Rol({
+    let permiso = new PermisonAcceso({
         name: body.name,
-        days: body.days,
-        start_time: body.start_time,
-        end_time: body.end_time,
+        user: body.user,
+        sala: body.sala,
     });
 
 
 
-    rol.save((err, rolDB) => {
+    permiso.save((err, permisoDB) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
                 err
             });
         };
-        if (!rolDB) {
+        if (!permisoDB) {
             return res.status(400).json({
                 ok: false,
                 err
@@ -79,7 +78,7 @@ app.post('/rol', (req, res) => {
         };
         res.json({
             ok: true,
-            rol: rolDB
+            rol: permisoDB
         });
 
     });
@@ -87,29 +86,28 @@ app.post('/rol', (req, res) => {
 
 });
 
-app.put('/rol/:id', (req, res) => {
+app.put('/permiso/:id', (req, res) => {
     let id = req.params.id;
 
     let body = req.body;
 
-    let nombreRol = {
+    let nombrePermiso = {
         name: body.name,
-        days: body.days,
-        start_time: body.start_time,
-        end_time: body.end_time,
+        user: body.user,
+        sala: body.sala,
     };
 
-    Rol.findByIdAndUpdate(id, body, {
+    PermisonAcceso.findByIdAndUpdate(id, body, {
         new: true,
         runValidators: true
-    }, (err, rolDB) => {
+    }, (err, permisoDB) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
                 err
             });
         };
-        if (!rolDB) {
+        if (!permisoDB) {
             return res.status(400).json({
                 ok: false,
                 err
@@ -117,23 +115,23 @@ app.put('/rol/:id', (req, res) => {
         }
         res.json({
             ok: true,
-            sala: rolDB
+            sala: permisoDB
         });
     });
 
 });
 
 
-app.delete('/rol/:id', (req, res) => {
+app.delete('/permiso/:id', (req, res) => {
     let id = req.params.id;
 
     let cambiaState = {
         state: false
     }
 
-    Rol.findByIdAndUpdate(id, cambiaState, {
+    PermisonAcceso.findByIdAndUpdate(id, cambiaState, {
         new: true,
-    }, (err, rolBorrada) => {
+    }, (err, permisoBorrada) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
@@ -141,18 +139,18 @@ app.delete('/rol/:id', (req, res) => {
             });
         };
 
-        if (!rolBorrada) {
+        if (!permisoBorrada) {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'Rol no encontrada'
+                    message: 'Permiso no encontrada'
                 }
             });
         }
 
         res.json({
             ok: true,
-            sala: rolBorrada
+            sala: permisoBorrada
         });
     });
 });
