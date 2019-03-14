@@ -32,7 +32,7 @@ app.get('/acceso/', (req, res) => {
 
 app.get('/acceso/:id', (req, res) => {
     id = req.params.id;
-    Usuario.findById(id, (err, accesoDB) => {
+    Acceso.findById(id, (err, accesoDB) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
@@ -59,9 +59,9 @@ app.get('/acceso/:id', (req, res) => {
 app.post('/acceso', (req, res) => {
     let body = req.body;
     let acceso = new Acceso({
-        date: date.format(now, 'ddd MMM DD YYYY'),
-        hour: date.format(now, 'hh:mm'),
-        usuario: body.usuario,
+        date: date.format(now, 'ddd MMM DD YYYY', true),
+        hour: date.format(now, 'hh:mm:ss A'),
+        user: body.user,
         sala: body.sala,
         typeAccess: body.typeAccess
     });

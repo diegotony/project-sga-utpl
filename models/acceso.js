@@ -11,12 +11,12 @@ let typeAccess = {
 
 
 let accesoSchema = new Schema({
-    date: Date,
-    hour: Date,
-    usuario: {
+    date: String,
+    hour: String,
+    user: {
         type: Schema.Types.ObjectId,
-        ref: 'Usuario',
-        required: [true, 'the usuario must be assigned']
+        ref: 'User',
+        required: [true, 'the user must be assigned']
     },
     sala: {
         type: Schema.Types.ObjectId,
