@@ -1,0 +1,34 @@
+{
+  "name": "sga-utpl",
+  "version": "1.0.0",
+  "description": "REST  for access to labs",
+  "main": "server.js",
+  "dependencies": {
+    "bcrypt": "^3.0.4",
+    "body-parser": "^1.18.3",
+    "date-and-time": "^0.6.3",
+    "express": "^4.16.4",
+    "moment": "^2.24.0",
+    "mongoose": "^5.4.19",
+    "mongoose-unique-validator": "^2.0.2",
+    "node-datetime": "^2.1.2",
+    "nodemon": "^1.18.10",
+    "path": "^0.12.7",
+    "underscore": "^1.9.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diegotony/sga-utpl.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/diegotony/sga-utpl/issues"
+  },
+  "homepage": "https://github.com/diegotony/sga-utpl#readme"
+}
