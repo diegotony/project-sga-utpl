@@ -92,7 +92,7 @@ app.post('/acceso', (req, res) => {
 
 });
 
-app.put('/permiso/:id', (req, res) => {
+app.put('/acceso/:id', (req, res) => {
     let id = req.params.id;
     let body = req.body;
 
@@ -128,7 +128,7 @@ app.put('/permiso/:id', (req, res) => {
 
 });
 
-app.delete('/permiso/:id', (req, res) => {
+app.delete('/acceso/:id', (req, res) => {
     let id = req.params.id;
 
     let cambiaState = {
