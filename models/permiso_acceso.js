@@ -1,12 +1,13 @@
 const mongoose = require('mongoose')
 let Schema = mongoose.Schema;
-
+let typeAccess = {
+    values: ['ENTRADA', 'SALIDA'],
+    message: '{VALUE} its not a valid type of access'
+}
 
 let permisoSchema = new Schema({
-    name: {
-        type: String,
-        required: [true, ' name required']
-    },
+    date: String,
+    hour: String,
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -16,6 +17,10 @@ let permisoSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Sala',
         required: [true, 'the sala must be assigned']
+    },
+    typeAccess: {
+        type: String,
+        enum: typeAccess
     },
     state: {
         type: Boolean,

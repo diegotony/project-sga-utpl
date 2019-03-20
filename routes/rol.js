@@ -57,9 +57,6 @@ app.post('/rol', (req, res) => {
     let body = req.body;
     let rol = new Rol({
         name: body.name,
-        days: body.days,
-        start_time: body.start_time,
-        end_time: body.end_time,
     });
 
 
@@ -94,9 +91,6 @@ app.put('/rol/:id', (req, res) => {
 
     let nombreRol = {
         name: body.name,
-        days: body.days,
-        start_time: body.start_time,
-        end_time: body.end_time,
     };
 
     Rol.findByIdAndUpdate(id, body, {

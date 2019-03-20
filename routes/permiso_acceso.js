@@ -1,10 +1,14 @@
 const express = require('express')
 const app = express();
 const PermisonAcceso = require('../models/permiso_acceso');
+const date = require('date-and-time');
+// const bcrypt = require('bcrypt');
+// const underscore = require('underscore');
+let now = new Date();
 
 //  GET LIST
 
-app.get('/permiso/', (req, res) => {
+app.get('/acceso/', (req, res) => {
     PermisonAcceso.find({
             state: true
         })
@@ -27,7 +31,7 @@ app.get('/permiso/', (req, res) => {
 // GET ID ROL
 
 
-app.get('/permiso/:id', (req, res) => {
+app.get('/acceso/:id', (req, res) => {
     id = req.params.id;
     PermisonAcceso.findById(id, (err, permisoDB) => {
         if (err) {
@@ -53,12 +57,14 @@ app.get('/permiso/:id', (req, res) => {
 
 // POST ROL
 
-app.post('/permiso', (req, res) => {
+app.post('/acceso', (req, res) => {
     let body = req.body;
     let permiso = new PermisonAcceso({
-        name: body.name,
+        date: date.format(now, 'ddd MMM DD YYYY', true),
+        hour: date.format(now, 'hh:mm:ss A'),
         user: body.user,
         sala: body.sala,
+        typeAccess: body.typeAccess
     });
 
 
@@ -88,13 +94,14 @@ app.post('/permiso', (req, res) => {
 
 app.put('/permiso/:id', (req, res) => {
     let id = req.params.id;
-
     let body = req.body;
 
     let nombrePermiso = {
-        name: body.name,
+        date: date.format(now, 'ddd MMM DD YYYY', true),
+        hour: date.format(now, 'hh:mm:ss A'),
         user: body.user,
         sala: body.sala,
+        typeAccess: body.typeAccess
     };
 
     PermisonAcceso.findByIdAndUpdate(id, body, {
@@ -120,7 +127,6 @@ app.put('/permiso/:id', (req, res) => {
     });
 
 });
-
 
 app.delete('/permiso/:id', (req, res) => {
     let id = req.params.id;
