@@ -53,7 +53,7 @@ app.get('/usuario/:id', (req, res) => {
 });
 
 
-// POST USUARIO
+// POST USUARIO DATA dsadasda
 
 app.post('/usuario', (req, res) => {
     let body = req.body;
@@ -64,7 +64,7 @@ app.post('/usuario', (req, res) => {
         secondSurname: body.secondSurname,
         email: body.email,
         username: body.username,
-        password: body.password,
+        password: bcrypt.hashSync(body.password, 10),
         rol: body.rol,
         state: body.state
     });
