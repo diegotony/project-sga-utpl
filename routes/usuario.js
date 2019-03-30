@@ -9,7 +9,7 @@ const underscore = require('underscore');
 app.get('/usuario/', (req, res) => {
     Usuario.find({
             state: true
-        })
+        }, 'firstName firstSurname username')
         .exec((err, usuarios) => {
             if (err) {
                 return res.status(500).json({
