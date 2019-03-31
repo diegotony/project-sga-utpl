@@ -26,6 +26,13 @@ process.env.URLDB = urlDB;
 
 
 // ====================================================
-// TOKEN
+// VENCIMIENTO DEL TOKEN
 // ================================= ===================
-process.env.CADUCIDAD_TOKEN = '144h';
+process.env.CADUCIDAD_TOKEN = '30d';
+
+//====================================================
+// SEED Auth
+//====================================================
+
+process.env.SEED = process.env.SEED || 'secret-secret-really-secret';
+// secret-secret-really-secret-prod

@@ -6,8 +6,14 @@ const bcrypt = require('bcrypt');
 const underscore = require('underscore');
 let now = new Date();
 
+const {
+    verificaToken,
+    verifica_Admin_Role
+} = require('../middleware/autentificacion');
+
+
 //  GET LIST
-app.get('/permiso/', (req, res) => {
+app.get('/permiso/', verificaToken, (req, res) => {
     PermisoRol.find({
             state: true
         })
@@ -30,7 +36,7 @@ app.get('/permiso/', (req, res) => {
 // GET ID USUARIO
 
 
-app.get('/permiso/:id', (req, res) => {
+app.get('/permiso/:id', verificaToken, (req, res) => {
     id = req.params.id;
     PermisoRol.findById(id, (err, permisoDB) => {
         if (err) {
@@ -88,7 +94,7 @@ app.post('/permiso', (req, res) => {
 
 });
 
-app.put('/permiso/:id', (req, res) => {
+app.put('/permiso/:id', [verificaToken, verifica_Admin_Role], (req, res) => {
     let id = req.params.id;
 
     let body = req.body;
@@ -125,7 +131,7 @@ app.put('/permiso/:id', (req, res) => {
 });
 
 
-app.delete('/permiso/:id', (req, res) => {
+app.delete('/permiso/:id', [verificaToken, verifica_Admin_Role], (req, res) => {
     let id = req.params.id;
 
     let cambiaState = {
@@ -159,4 +165,4 @@ app.delete('/permiso/:id', (req, res) => {
 });
 
 
-module.exports = app
+module.exports = app;

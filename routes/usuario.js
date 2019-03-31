@@ -5,8 +5,14 @@ const bcrypt = require('bcrypt');
 const underscore = require('underscore');
 
 
+const {
+    verificaToken,
+    verifica_Admin_Role
+} = require('../middleware/autentificacion');
+
+
 //  GET LIST
-app.get('/usuario/', (req, res) => {
+app.get('/usuario/', verificaToken, (req, res) => {
     Usuario.find({
             state: true
         }, 'firstName firstSurname username')
@@ -29,7 +35,7 @@ app.get('/usuario/', (req, res) => {
 // GET ID USUARIO
 
 
-app.get('/usuario/:id', (req, res) => {
+app.get('/usuario/:id', [verificaToken], (req, res) => {
     id = req.params.id;
     Usuario.findById(id, (err, usuarioDB) => {
         if (err) {
@@ -55,7 +61,7 @@ app.get('/usuario/:id', (req, res) => {
 
 // POST USUARIO DATA dsadasda
 
-app.post('/usuario', (req, res) => {
+app.post('/usuario', [verificaToken, verifica_Admin_Role], (req, res) => {
     let body = req.body;
     let usuario = new Usuario({
         firstName: body.firstName,
@@ -94,7 +100,7 @@ app.post('/usuario', (req, res) => {
 
 });
 
-app.put('/usuario/:id', (req, res) => {
+app.put('/usuario/:id', [verificaToken, verifica_Admin_Role], (req, res) => {
     let id = req.params.id;
 
     let body = req.body;
@@ -136,7 +142,7 @@ app.put('/usuario/:id', (req, res) => {
 });
 
 
-app.delete('/usuario/:id', (req, res) => {
+app.delete('/usuario/:id', [verificaToken, verifica_Admin_Role], (req, res) => {
     let id = req.params.id;
     let cambiaState = {
         state: false
@@ -169,4 +175,4 @@ app.delete('/usuario/:id', (req, res) => {
 });
 
 
-module.exports = app
+module.exports = app;

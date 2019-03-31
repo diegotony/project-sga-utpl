@@ -2,9 +2,15 @@ const express = require('express')
 const app = express();
 const Rol = require('../models/rol');
 
+const {
+    verificaToken,
+    verifica_Admin_Role
+} = require('../middleware/autentificacion');
+
+
 //  GET LIST
 
-app.get('/rol/', (req, res) => {
+app.get('/rol/', verificaToken, (req, res) => {
     Rol.find({
             state: true
         })
@@ -27,7 +33,7 @@ app.get('/rol/', (req, res) => {
 // GET ID ROL
 
 
-app.get('/rol/:id', (req, res) => {
+app.get('/rol/:id', verificaToken, (req, res) => {
     id = req.params.id;
     Rol.findById(id, (err, rolDB) => {
         if (err) {
@@ -53,7 +59,7 @@ app.get('/rol/:id', (req, res) => {
 
 // POST ROL
 
-app.post('/rol', (req, res) => {
+app.post('/rol', [verificaToken, verifica_Admin_Role], (req, res) => {
     let body = req.body;
     let rol = new Rol({
         name: body.name,
@@ -84,7 +90,7 @@ app.post('/rol', (req, res) => {
 
 });
 
-app.put('/rol/:id', (req, res) => {
+app.put('/rol/:id', [verificaToken, verifica_Admin_Role], (req, res) => {
     let id = req.params.id;
 
     let body = req.body;
@@ -118,7 +124,7 @@ app.put('/rol/:id', (req, res) => {
 });
 
 
-app.delete('/rol/:id', (req, res) => {
+app.delete('/rol/:id', [verificaToken, verifica_Admin_Role], (req, res) => {
     let id = req.params.id;
 
     let cambiaState = {

@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const app = express();
-module.exports = app;
 
 app.post('/login', (req, res) => {
     let body = req.body;
@@ -22,7 +21,7 @@ app.post('/login', (req, res) => {
             return res.status(500).json({
                 ok: false,
                 err: {
-                    message: "User no encontrado"
+                    message: "User o pass no encontrada"
                 }
             });
         }
@@ -31,10 +30,15 @@ app.post('/login', (req, res) => {
             return res.json({
                 ok: false,
                 err: {
-                    message: "pass no encontrado"
+                    message: "User o pass no encontrada"
                 }
             });
         }
+        // let token = jwt.sign({
+        //     usuario: usuarioDB
+        // }, 'secret', {
+        //     expiresIn: "30d"
+        // });
 
         let token = jwt.sign({
             usuario: usuarioDB
@@ -49,3 +53,5 @@ app.post('/login', (req, res) => {
         });
     });
 });
+
+module.exports = app;

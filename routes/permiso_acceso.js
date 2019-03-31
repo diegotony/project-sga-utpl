@@ -2,13 +2,17 @@ const express = require('express')
 const app = express();
 const PermisonAcceso = require('../models/permiso_acceso');
 const date = require('date-and-time');
-// const bcrypt = require('bcrypt');
-// const underscore = require('underscore');
+
+const {
+    verificaToken,
+    verifica_Admin_Role
+} = require('../middleware/autentificacion');
+
 let now = new Date();
 
 //  GET LIST
 
-app.get('/acceso/', (req, res) => {
+app.get('/acceso/', verificaToken, (req, res) => {
     PermisonAcceso.find({
             state: true
         })
@@ -31,7 +35,7 @@ app.get('/acceso/', (req, res) => {
 // GET ID ROL
 
 
-app.get('/acceso/:id', (req, res) => {
+app.get('/acceso/:id', verificaToken, (req, res) => {
     id = req.params.id;
     PermisonAcceso.findById(id, (err, permisoDB) => {
         if (err) {
@@ -57,7 +61,7 @@ app.get('/acceso/:id', (req, res) => {
 
 // POST ROL
 
-app.post('/acceso', (req, res) => {
+app.post('/acceso', verificaToken, (req, res) => {
     let body = req.body;
     let permiso = new PermisonAcceso({
         date: date.format(now, 'ddd MMM DD YYYY', true),
@@ -92,74 +96,74 @@ app.post('/acceso', (req, res) => {
 
 });
 
-app.put('/acceso/:id', (req, res) => {
-    let id = req.params.id;
-    let body = req.body;
+// app.put('/acceso/:id', verificaToken, (req, res) => {
+//     let id = req.params.id;
+//     let body = req.body;
 
-    let nombrePermiso = {
-        date: date.format(now, 'ddd MMM DD YYYY', true),
-        hour: date.format(now, 'hh:mm:ss A'),
-        user: body.user,
-        sala: body.sala,
-        typeAccess: body.typeAccess
-    };
+//     let nombrePermiso = {
+//         date: date.format(now, 'ddd MMM DD YYYY', true),
+//         hour: date.format(now, 'hh:mm:ss A'),
+//         user: body.user,
+//         sala: body.sala,
+//         typeAccess: body.typeAccess
+//     };
 
-    PermisonAcceso.findByIdAndUpdate(id, body, {
-        new: true,
-        runValidators: true
-    }, (err, permisoDB) => {
-        if (err) {
-            return res.status(500).json({
-                ok: false,
-                err
-            });
-        };
-        if (!permisoDB) {
-            return res.status(400).json({
-                ok: false,
-                err
-            });
-        }
-        res.json({
-            ok: true,
-            sala: permisoDB
-        });
-    });
+//     PermisonAcceso.findByIdAndUpdate(id, body, {
+//         new: true,
+//         runValidators: true
+//     }, (err, permisoDB) => {
+//         if (err) {
+//             return res.status(500).json({
+//                 ok: false,
+//                 err
+//             });
+//         };
+//         if (!permisoDB) {
+//             return res.status(400).json({
+//                 ok: false,
+//                 err
+//             });
+//         }
+//         res.json({
+//             ok: true,
+//             sala: permisoDB
+//         });
+//     });
 
-});
+// });
 
-app.delete('/acceso/:id', (req, res) => {
-    let id = req.params.id;
+// app.delete('/acceso/:id', verificaToken, (req, res) => {
+//     let id = req.params.id;
 
-    let cambiaState = {
-        state: false
-    }
+//     let cambiaState = {
+//         state: false
+//     }
 
-    PermisonAcceso.findByIdAndUpdate(id, cambiaState, {
-        new: true,
-    }, (err, permisoBorrada) => {
-        if (err) {
-            return res.status(400).json({
-                ok: false,
-                err
-            });
-        };
+//     PermisonAcceso.findByIdAndUpdate(id, cambiaState, {
+//         new: true,
+//     }, (err, permisoBorrada) => {
+//         if (err) {
+//             return res.status(400).json({
+//                 ok: false,
+//                 err
+//             });
+//         };
 
-        if (!permisoBorrada) {
-            return res.status(400).json({
-                ok: false,
-                err: {
-                    message: 'Permiso no encontrada'
-                }
-            });
-        }
+//         if (!permisoBorrada) {
+//             return res.status(400).json({
+//                 ok: false,
+//                 err: {
+//                     message: 'Permiso no encontrada'
+//                 }
+//             });
+//         }
 
-        res.json({
-            ok: true,
-            sala: permisoBorrada
-        });
-    });
-});
+//         res.json({
+//             ok: true,
+//             sala: permisoBorrada
+//         });
+//     });
+// });
 
 
 module.exports = app

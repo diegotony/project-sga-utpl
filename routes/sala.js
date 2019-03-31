@@ -3,10 +3,14 @@ const _ = require('underscore');
 const Sala = require('../models/sala');
 const app = express();
 
+const {
+    verificaToken,
+    verifica_Admin_Role
+} = require('../middleware/autentificacion');
 
 
 //  GET LIST
-app.get('/sala/', (req, res) => {
+app.get('/sala/', [verificaToken], (req, res) => {
     Sala.find({
             state: true
         })
@@ -29,7 +33,7 @@ app.get('/sala/', (req, res) => {
 // GET ID SALA
 
 
-app.get('/sala/:id', (req, res) => {
+app.get('/sala/:id', [verificaToken], (req, res) => {
     id = req.params.id;
     Sala.findById(id, (err, salaDB) => {
         if (err) {
@@ -55,7 +59,7 @@ app.get('/sala/:id', (req, res) => {
 
 // POST SALA
 
-app.post('/sala', (req, res) => {
+app.post('/sala', [verificaToken, verifica_Admin_Role], (req, res) => {
     let body = req.body;
     let sala = new Sala({
         name: body.name,
@@ -88,7 +92,7 @@ app.post('/sala', (req, res) => {
 
 });
 
-app.put('/sala/:id', (req, res) => {
+app.put('/sala/:id', [verificaToken, verifica_Admin_Role], (req, res) => {
     let id = req.params.id;
 
     let body = req.body;
@@ -123,7 +127,7 @@ app.put('/sala/:id', (req, res) => {
 });
 
 
-app.delete('/sala/:id', (req, res) => {
+app.delete('/sala/:id', [verificaToken, verifica_Admin_Role], (req, res) => {
     let id = req.params.id;
     let cambiaState = {
         state: false
@@ -156,4 +160,4 @@ app.delete('/sala/:id', (req, res) => {
 });
 
 
-module.exports = app
+module.exports = app;
