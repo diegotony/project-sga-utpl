@@ -62,7 +62,7 @@ app.get('/usuario/:id', [verificaToken], (req, res) => {
 // POST USUARIO DATA dsadasda
 //[verificaToken, verifica_Admin_Role], 
 
-app.post('/usuario', (req, res) => {
+app.post('/usuario', [verificaToken, verifica_Admin_Role], (req, res) => {
     let body = req.body;
     let usuario = new Usuario({
         firstName: body.firstName,
