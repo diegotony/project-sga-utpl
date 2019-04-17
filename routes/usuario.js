@@ -5,10 +5,10 @@ const bcrypt = require('bcrypt');
 const underscore = require('underscore');
 
 
-// const {
-//     verificaToken,
-//     verifica_Admin_Role
-// } = require('../middleware/autentificacion');
+const {
+    verificaToken,
+    verifica_Admin_Role
+} = require('../middleware/autentificacion');
 
 
 //  GET LIST
