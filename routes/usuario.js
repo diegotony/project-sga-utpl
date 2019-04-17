@@ -5,10 +5,10 @@ const bcrypt = require('bcrypt');
 const underscore = require('underscore');
 
 
-const {
-    verificaToken,
-    verifica_Admin_Role
-} = require('../middleware/autentificacion');
+// const {
+//     verificaToken,
+//     verifica_Admin_Role
+// } = require('../middleware/autentificacion');
 
 
 //  GET LIST
@@ -60,8 +60,9 @@ app.get('/usuario/:id', [verificaToken], (req, res) => {
 
 
 // POST USUARIO DATA dsadasda
+//[verificaToken, verifica_Admin_Role], 
 
-app.post('/usuario', [verificaToken, verifica_Admin_Role], (req, res) => {
+app.post('/usuario', (req, res) => {
     let body = req.body;
     let usuario = new Usuario({
         firstName: body.firstName,
