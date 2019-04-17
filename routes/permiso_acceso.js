@@ -2,7 +2,7 @@ const express = require('express')
 const app = express();
 const PermisonAcceso = require('../models/permiso_acceso');
 const date = require('date-and-time');
-
+const mongoose = require('mongoose');
 const {
     verificaToken,
     verifica_Admin_Role
@@ -10,7 +10,7 @@ const {
 
 let now = new Date();
 
-//  GET LIST
+//  GET LIST of ALL ACCESS 
 
 app.get('/acceso/', verificaToken, (req, res) => {
     PermisonAcceso.find({
@@ -31,9 +31,7 @@ app.get('/acceso/', verificaToken, (req, res) => {
 
 });
 
-
-// GET ID ROL
-
+// GET INFO BY ID OF ACCESS
 
 app.get('/acceso/:id', verificaToken, (req, res) => {
     id = req.params.id;
@@ -58,6 +56,34 @@ app.get('/acceso/:id', verificaToken, (req, res) => {
 
 });
 
+//  GET ACCESS BY ID of USER 
+
+app.get('/acceso/user/:id', verificaToken, (req, res) => {
+    id = req.params.id;
+    query = "'"+id+"'" 
+    PermisonAcceso.find({'user': mongoose.Types.ObjectId(id) }, (err, permisoDB) => {
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                err
+            });
+        };
+        if (!permisoDB) {
+            return res.status(500).json({
+                ok: false,
+                err: "El id no es correcto"
+            });
+        }
+        res.json({
+            ok: true,
+            permisoDB
+        });
+    });
+
+});
+
+
+
 
 // POST ROL
 
@@ -70,8 +96,6 @@ app.post('/acceso', verificaToken, (req, res) => {
         sala: body.sala,
         typeAccess: body.typeAccess
     });
-
-
 
     permiso.save((err, permisoDB) => {
         if (err) {
