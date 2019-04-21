@@ -60,8 +60,10 @@ app.get('/acceso/:id', verificaToken, (req, res) => {
 
 app.get('/acceso/user/:id', verificaToken, (req, res) => {
     id = req.params.id;
-    query = "'"+id+"'" 
-    PermisonAcceso.find({'user': mongoose.Types.ObjectId(id) }, (err, permisoDB) => {
+    query = "'" + id + "'"
+    PermisonAcceso.find({
+        'user': mongoose.Types.ObjectId(id)
+    }, (err, permisoDB) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
@@ -112,7 +114,7 @@ app.post('/acceso', verificaToken, (req, res) => {
         };
         res.json({
             ok: true,
-            rol: permisoDB
+            permiso: permisoDB
         });
 
     });
