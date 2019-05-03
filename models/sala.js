@@ -8,9 +8,9 @@ let salaSchema = new Schema({
         type: String,
         required: [true, 'The name must be assigned']
     },
-    qr_code: {
+    description: {
         type: String,
-        required: [true, 'the qr_code must be assigned']
+        required: [true, 'the desciption must be assigned']
     },
     state: {
         type: Boolean,
