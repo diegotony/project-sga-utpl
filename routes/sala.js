@@ -63,7 +63,7 @@ app.post('/sala', [verificaToken, verifica_Admin_Role], (req, res) => {
     let body = req.body;
     let sala = new Sala({
         name: body.name,
-        qr_code: body.qr_code
+        description: body.description
 
     });
 
@@ -99,7 +99,7 @@ app.put('/sala/:id', [verificaToken, verifica_Admin_Role], (req, res) => {
 
     let nombreSala = {
         nombre: body.nombre,
-        qr_code: body.qr_code
+        description: body.description
     };
     // usuarioBD.save valid
     Sala.findByIdAndUpdate(id, body, {
