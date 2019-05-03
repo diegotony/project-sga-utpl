@@ -29,4 +29,4 @@ let permisoSchema = new Schema({
 
 });
 
-module.exports = mongoose.model('PermisoAcceso', permisoSchema);
+module.exports = mongoose.model('PermisoAcceso', permisoSchema, 'PermisoAcceso');

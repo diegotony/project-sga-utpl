@@ -101,7 +101,7 @@ app.post('/usuario', [verificaToken, verifica_Admin_Role], (req, res) => {
 
 });
 
-app.put('/usuario/:id', [verificaToken, verifica_Admin_Role], (req, res) => {
+app.put('/usuario/:id', [verificaToken], (req, res) => {
     let id = req.params.id;
 
     let body = req.body;
