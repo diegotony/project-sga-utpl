@@ -76,7 +76,7 @@ app.get("/acceso/", verificaToken, (req, res) => {
         });
     });
 
-    console.log(dateFormat(now, "dddd, mmmm dS, yyyy"));
+    // console.log(dateFormat(now, "dddd, mmmm d, yyyy"));
 });
 
 // GET INFO BY ID OF ACCESS
@@ -136,9 +136,10 @@ app.get("/acceso/user/:id", verificaToken, (req, res) => {
 
 app.post("/acceso", verificaToken, (req, res) => {
     let body = req.body;
+    let de = "de"
 
     let entrada = new PermisonAcceso({
-        date: date.format(now, 'ddd MMM DD YYYY', true),
+        date: dateFormat(now, "dddd, d 'de' mmmm , yyyy"),
         hour: date.format(now, 'hh:mm:ss A'),
         user: body.user,
         sala: body.sala,
@@ -146,7 +147,7 @@ app.post("/acceso", verificaToken, (req, res) => {
     });
 
     let salida = new PermisonAcceso({
-        date: date.format(now, 'ddd MMM DD YYYY', true),
+        date: dateFormat(now, "dddd, d 'de' mmmm, yyyy"),
         hour: date.format(now, 'hh:mm:ss A'),
         user: body.user,
         sala: body.sala,
@@ -156,7 +157,7 @@ app.post("/acceso", verificaToken, (req, res) => {
     PermisonAcceso.findOne(({
         user: body.user
     }), (err, result) => {
-        console.log(result)
+        // console.log(result)
         if (err) {
             return res.status(500).json({
                 ok: false,
