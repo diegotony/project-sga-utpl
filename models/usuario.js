@@ -22,11 +22,13 @@ let userSchema = new Schema({
     },
     email: {
         type: String,
-        required: [true, 'the email must be assigned']
+        required: [true, 'the email must be assigned'],
+        //unique: true
     },
     username: {
         type: String,
-        required: [true, 'the username must be assigned']
+        required: [true, 'the username must be assigned'],
+        //unique: true
     },
     password: {
         type: String,

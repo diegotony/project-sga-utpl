@@ -59,7 +59,7 @@ app.get('/usuario/:id', [verificaToken], (req, res) => {
 });
 
 
-// POST USUARIO DATA dsadasda
+// POST USUARIO DATA 
 //[verificaToken, verifica_Admin_Role], 
 
 app.post('/usuario', [verificaToken, verifica_Admin_Role], (req, res) => {
