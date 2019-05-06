@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
 const PermisonAcceso = require("../models/permiso_acceso");
-const Usuario = require("../models/usuario");
 const date = require("date-and-time");
+const Sala = require("../models/sala");
 var dateFormat = require("dateformat");
 const mongoose = require("mongoose");
 const {
@@ -124,12 +124,15 @@ app.get("/acceso/user/:id", verificaToken, (req, res) => {
                     err: "El id no es correcto"
                 });
             }
+
             res.json({
                 ok: true,
-                permisoDB
+                permisoDB,
             });
+
+
         }
-    );
+    ).populate("sala");
 });
 
 // POST DE ACCESO
@@ -139,7 +142,7 @@ app.post("/acceso", verificaToken, (req, res) => {
     let de = "de"
 
     let entrada = new PermisonAcceso({
-        date: dateFormat(now, "dddd, d 'de' mmmm , yyyy"),
+        date: dateFormat(now, "dddd, d 'de' mmmm 'del' yyyy"),
         hour: date.format(now, 'hh:mm:ss A'),
         user: body.user,
         sala: body.sala,
