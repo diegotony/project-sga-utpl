@@ -94,9 +94,7 @@ app.post('/sala', [verificaToken, verifica_Admin_Role], (req, res) => {
 
 app.put('/sala/:id', [verificaToken, verifica_Admin_Role], (req, res) => {
     let id = req.params.id;
-
     let body = req.body;
-
     let nombreSala = {
         nombre: body.nombre,
         description: body.description
