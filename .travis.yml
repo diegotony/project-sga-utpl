@@ -1,11 +1,16 @@
 sudo: required
 language: node_js
-services: 
-    -mongodb
-    -docker
+node_js: "11"
 env:
   -distribution: ubuntu
    version: xenial
   -distribution: debian
    version: jessie
-node_js: "stable"
+
+addons:
+  sonarcloud:
+    organization: "diegotony-github"
+    token:
+      secure: 
+
+
