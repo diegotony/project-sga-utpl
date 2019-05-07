@@ -1,2 +1,11 @@
+sudo: required
 language: node_js
-node_js: "11"
+services: 
+    -mongodb
+    -docker
+env:
+  -distribution: ubuntu
+   version: xenial
+  -distribution: debian
+   version: jessie
+node_js: "stable"
