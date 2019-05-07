@@ -23,6 +23,8 @@ mongoose.connect(process.env.URLDB, {
     console.log("MONGO IS WORKING ");
 });
 
+// Port 
+
 app.listen(process.env.PORT, () => {
     // console.log("NODEJS LISTENING ", process.env.PORT);    
     console.log("NODEJS WORKING ");
