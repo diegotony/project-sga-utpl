@@ -19,3 +19,6 @@
 ### Request and Reponses
 
 [Postman](https://www.getpostman.com/downloads/)
+
+### Deploy
+[Heroku](https://id.heroku.com/login)
