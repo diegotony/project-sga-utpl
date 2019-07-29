@@ -1,8 +1,11 @@
 //====================================================
 // PORT
 //====================================================
-process.env.PORT = process.env.PORT || 3000;
+process.env.PORT =  8080;
 
+
+//====================================================
+process.env.HOST = '0.0.0.0'
 //====================================================
 //Entorno
 //====================================================
@@ -13,14 +16,14 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 // BD
 //====================================================
 
-let urlDB;
-if (process.env.NODE_ENV == 'dev') {
-    urlDB = 'mongodb://localhost:27017/sga';
+let  urlDB;
+//if (process.env.NODE_ENV == 'dev') {
+urlDB = 'mongodb://mongo:27017/sga';
 
     //mongodb://admin:admin123@ds031895.mlab.com:31895/sga
-} else {
-    urlDB = process.env.MONGO_URI;
-}
+//} else {
+//    urlDB = process.env.MONGO_URI;
+//}
 process.env.URLDB = urlDB;
 
 // ====================================================

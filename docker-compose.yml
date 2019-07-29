@@ -1,0 +1,22 @@
+version: '2'
+services:
+  app:
+    build: .
+    depends_on:
+      - mongo
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/usr/src/app
+  mongo:
+    image: 'mongo'
+    ports:
+      - "27017:27017"
+    volumes:
+      - data-volume:/data/db
+    environment:
+      - MONGODB_USERNAME=dev
+      - MONGODB_PASSWORD=12345
+      - MONGODB_DATABASE=bda
+volumes:
+     data-volume:

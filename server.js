@@ -25,8 +25,5 @@ mongoose.connect(process.env.URLDB, {
 
 // Port 
 
-app.listen(process.env.PORT, () => {
-    // console.log("NODEJS LISTENING ", process.env.PORT);    
-    console.log("NODEJS WORKING ");
-
-});
+app.listen(process.env.PORT,process.env.HOST);
+console.log(`Running on http://${process.env.HOST}:${process.env.PORT}`)
