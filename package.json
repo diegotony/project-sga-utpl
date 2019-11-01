@@ -14,7 +14,7 @@
     "jshint": "^2.10.2",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
-    "mongoose": "^5.4.19",
+    "mongoose": "^5.7.5",
     "mongoose-unique-validator": "^2.0.3",
     "node-datetime": "^2.1.2",
     "nodemon": "^1.18.10",
