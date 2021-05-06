@@ -19,7 +19,7 @@
     "node-datetime": "^2.1.2",
     "nodemon": "^1.18.10",
     "path": "^0.12.7",
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   },
   "devDependencies": {},
   "scripts": {
